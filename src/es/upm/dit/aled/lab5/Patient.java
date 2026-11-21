@@ -164,7 +164,12 @@ public class Patient extends Thread {
 	 */
 	@Override
 	public void run() {
-		// TODO
+		while (this.indexProtocol<this.protocol.size()) { 
+			location.enter(this); // Los métodos entrar y salir tienen que recibir como parámetro al paciente que lo pide. Dice eh, que soy yo, debe pasarse a sí mismo como parámetro
+			this.attendedAtLocation(); // Atiendo
+			location.exit(this);
+			this.advanceProtocol(); // Avanzo
+		}
+		EmergencyRoomGUI.getInstance().removePatient(this); // La última sentencia que le pide a la pantalla gráfica que borre al paciente
 	}
-
 }
